@@ -4,6 +4,6 @@
 <h2>{{ product_detail.name }}</h2>
 <p>Price: {{product_detail.price}}</p>
 <p>{{ product_detail.description }}</p>
-{% comment %} <img src="{{ product_detail.image.url }}" alt="{{product_detail.name}}" width="200"> {% endcomment %}
-{% comment %} <a href="{% url 'add_to_cart' product_id %}">Add to Cart</a> {% endcomment %}
+<img src="{{ product_detail.image.url }}" alt="{{product_detail.name}}" width="200">
+<a href="{% url 'add_to_cart' product_detail.id %}">Add to Cart</a>
 {% endblock %}
