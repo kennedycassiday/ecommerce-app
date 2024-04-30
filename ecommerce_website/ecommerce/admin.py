@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Order
+from .models import Category, Product, Order, OrderItem
 
 # Register your models here.
 
@@ -19,6 +19,10 @@ class Product(admin.ModelAdmin):
         "image",
     )
 
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 1
+
 @admin.register(Order)
 class Order(admin.ModelAdmin):
     list_display = (
@@ -27,3 +31,4 @@ class Order(admin.ModelAdmin):
         "ordered_date",
         "is_ordered",
     )
+    inlines = [OrderItemInline,]
