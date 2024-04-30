@@ -37,7 +37,7 @@ def add_to_cart(request, product_id):
 
 def view_cart(request):
     order = Order.objects.get(user=request.user, is_ordered=False)
-    order_items = Order.OrderItem_set.all()
+    order_items = order.orderitem_set.all()
     context = {
         'order': order,
         'order_items': order_items,
