@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Order
 
 # Register your models here.
 
@@ -17,4 +17,13 @@ class Product(admin.ModelAdmin):
         "price",
         "description",
         "image",
+    )
+
+@admin.register(Order)
+class Order(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "total_price",
+        "ordered_date",
+        "is_ordered",
     )
