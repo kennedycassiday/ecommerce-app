@@ -5,6 +5,7 @@
 <p>Price: {{product_detail.price}}</p>
 <p>{{ product_detail.description }}</p>
 <img src="{{ product_detail.image.url }}" alt="{{product_detail.name}}" width="200">
+<br>
 <a href="{% url 'add_to_cart' product_detail.id %}">Add to Cart</a>
 <footer>
     <p><a href="{% url 'view_cart' %}">View Cart</a></p>
