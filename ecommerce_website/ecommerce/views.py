@@ -36,10 +36,24 @@ def add_to_cart(request, product_id):
     return redirect('product_list')
 
 def view_cart(request):
-    order = Order.objects.get(user=request.user, is_ordered=False)
-    order_items = order.orderitem_set.all()
-    context = {
-        'order': order,
-        'order_items': order_items,
-    }
+    try:
+        order = Order.objects.get(user=request.user, is_ordered=False)
+        order_items = order.orderitem_set.all()
+        context = {
+            'order': order,
+            'order_items': order_items,
+        }
+
+    except Order.DoesNotExist:
+        return render(request, 'ecommerce/empty_cart.html')
+
     return render(request, 'ecommerce/view_cart.html', context)
+
+def checkout(request):
+    order = Order.objects.get(user=request.user, is_ordered=False)
+    order.is_ordered = True
+    order.save()
+    context = {
+        'order': order
+    }
+    return render(request, 'ecommerce/checkout.html', context)
