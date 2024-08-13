@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  web:
+    image: ecommerce-app
+    build:
+      context: .
+    command: python ecommerce_website/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container
+      - db_data:/ecommerce_website/app/db.sqlite3  # Mount the persistent volume for the SQLite database
+    ports:
+      - "8000:8000"
+    env_file:
+      - ecommerce_website/.env
+    environment:
+      - DEBUG=1  # Set to 0 in production
+      - ALLOWED_HOSTS=localhost  # Add your production host if needed
+volumes:
+  db_data:
